@@ -2,3 +2,5 @@
 data/
 sequences.tar.bz2
 *.pyc
+*.sh
+*.txt
