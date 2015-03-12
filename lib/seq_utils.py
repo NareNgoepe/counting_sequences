@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 def count_seqs(input_file):
     count = 0
     for line in input_file:

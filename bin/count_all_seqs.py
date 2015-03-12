@@ -1,25 +1,18 @@
 #!/usr/bin/env python
 
 import sys
-import os.path
-import glob
 import seq_utils
+import os
+import os.path
 
-if len(sys.argv) != 2:
-    sys.exit("Usage: {} <directory name>".format(os.path.basename(sys.argv[0])))
+if len(sys.argv) < 2:
+   exit ('specify sequence')
 
-dirname = sys.argv[1]
-if not os.path.isdir(dirname):
-    sys.exit("{} is not a directory!".format(dirname))
+directory = sys.argv[1]
+#filename = 'python.fasta'
+for filenames in os.listdir(directory):
+    input_file = open(os.path.join(directory, filenames))
+    seq_count = seq_utils.count_seqs(input_file)
+    print filenames, seq_count
 
-pattern = '*.fasta'
-path_pattern = os.path.join(dirname, pattern)
-for filepath in sorted(glob.glob(path_pattern)):
-    filename = os.path.basename(filepath)
-    try:
-        input_file = open(filepath)
-    except IOError as e:
-        print >>sys.stderr, "Failed to open {}: {}".format(filepath, e.strerror)
-    else:
-        seq_count = seq_utils.count_seqs(input_file)
-        print filename, seq_count
+
